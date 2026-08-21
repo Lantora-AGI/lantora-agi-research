@@ -1,0 +1,38 @@
+# Operating systems and editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# JavaScript
+node_modules/
+.next/
+dist/
+coverage/
+
+# Research outputs and large artifacts
+artifacts/
+checkpoints/
+data/raw/
+runs/
+wandb/
+*.ckpt
+*.safetensors
+

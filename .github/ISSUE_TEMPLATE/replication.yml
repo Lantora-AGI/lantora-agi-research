@@ -1,0 +1,24 @@
+name: Replication
+description: Propose or report an independent replication attempt
+title: "[Replication]: "
+labels: ["replication"]
+body:
+  - type: input
+    id: original
+    attributes:
+      label: Original experiment or claim
+    validations:
+      required: true
+  - type: textarea
+    id: independence
+    attributes:
+      label: Independence and methodological differences
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Results, artifacts, and limitations
+    validations:
+      required: true
+

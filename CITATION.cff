@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this research program or its artifacts, please cite it using this metadata."
+title: "Lantora AGI Research Program"
+type: software
+version: 0.1.0
+date-released: 2026-08-21
+license: Apache-2.0
+repository-code: "https://github.com/Lantora-AGI/lantora-agi-research"
+url: "https://github.com/Lantora-AGI/lantora-agi-research"
+authors:
+  - name: "Lantora AGI Research Program contributors"
+

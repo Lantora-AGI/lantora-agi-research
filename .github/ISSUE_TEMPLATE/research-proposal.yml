@@ -1,0 +1,30 @@
+name: Research proposal
+description: Propose a falsifiable research hypothesis and differentiating experiment
+title: "[Proposal]: "
+labels: ["proposal"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question
+    validations:
+      required: true
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Falsifiable hypothesis and predicted observation
+    validations:
+      required: true
+  - type: textarea
+    id: baseline
+    attributes:
+      label: Baselines, controls, and compute matching
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety considerations and stopping rule
+    validations:
+      required: true
+
