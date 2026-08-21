@@ -22,13 +22,14 @@ REQUIRED_FIELDS = {
     "scorer",
     "limits",
 }
+OPTIONAL_FIELDS = {"condition", "budget", "metadata"}
 
 
 def _validate(raw: Any, path: Path) -> Task:
     if not isinstance(raw, dict):
         raise TaskValidationError(f"{path}: task must be a JSON object")
     missing = REQUIRED_FIELDS - raw.keys()
-    unknown = raw.keys() - REQUIRED_FIELDS
+    unknown = raw.keys() - REQUIRED_FIELDS - OPTIONAL_FIELDS
     if missing or unknown:
         raise TaskValidationError(
             f"{path}: missing={sorted(missing)} unknown={sorted(unknown)}"
@@ -43,8 +44,15 @@ def _validate(raw: Any, path: Path) -> Task:
         raise TaskValidationError(f"{path}: max_seconds must be positive")
     if not isinstance(limits["max_steps"], int) or limits["max_steps"] <= 0:
         raise TaskValidationError(f"{path}: max_steps must be a positive integer")
-    if raw["scorer"] != "exact_match":
+    if raw["scorer"] not in {"exact_match", "constraint_validity"}:
         raise TaskValidationError(f"{path}: unsupported scorer {raw['scorer']!r}")
+    raw.setdefault("condition", "infrastructure")
+    raw.setdefault("budget", {})
+    raw.setdefault("metadata", {})
+    if not isinstance(raw["condition"], str) or not raw["condition"]:
+        raise TaskValidationError(f"{path}: condition must be a non-empty string")
+    if not isinstance(raw["budget"], dict) or not isinstance(raw["metadata"], dict):
+        raise TaskValidationError(f"{path}: budget and metadata must be objects")
     return Task(**raw)
 
 
@@ -57,4 +65,3 @@ def load_tasks(directory: Path) -> list[Task]:
     if len(identities) != len(set(identities)):
         raise TaskValidationError("task_id and version pairs must be unique")
     return tasks
-

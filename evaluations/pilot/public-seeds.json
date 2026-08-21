@@ -1,0 +1,7 @@
+{
+  "generator_version": "0.1.0",
+  "development_seeds": [13001, 13002, 13003, 13004, 13005],
+  "validation_seed_range": {"minimum": 1000000, "maximum": 9999999},
+  "validation_seed_count": 5,
+  "note": "Validation seeds are selected only after candidate configuration is frozen. Do not reuse development seeds as held-out evidence."
+}

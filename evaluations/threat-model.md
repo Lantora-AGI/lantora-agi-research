@@ -15,6 +15,8 @@ an independently reviewed isolation boundary before it can run untrusted code.
 ## Addressed risks
 
 - Task definitions cannot embed executable Python code.
+- Candidate adapters receive a task view with gold answers removed. Only the
+  explicitly marked oracle test adapter has trusted gold access.
 - The reference path needs no credentials or network access.
 - Canonical SHA-256 hashes identify inputs and outputs.
 - Existing result directories are never overwritten.
@@ -45,4 +47,3 @@ Passing the included fixtures demonstrates that the harness plumbing works. It
 does not demonstrate AGI, model capability, alignment, or deployment readiness.
 Any later scientific evaluation must preregister claims, baselines, uncertainty,
 holdout controls, contamination analysis, safety review, and replication plans.
-

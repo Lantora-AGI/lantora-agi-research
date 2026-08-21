@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lantora-eval"
-version = "0.1.0"
+version = "0.2.0"
 description = "Provider-neutral evaluation harness for the Lantora AGI Research Program"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -14,7 +14,7 @@ dependencies = []
 
 [project.scripts]
 lantora-eval = "lantora_eval.cli:main"
+lantora-pilot = "lantora_eval.pilot_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-

@@ -6,6 +6,7 @@ import random
 import subprocess
 import sys
 import time
+from dataclasses import replace
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -14,6 +15,7 @@ from . import __version__
 from .artifacts import sha256, write_bundle
 from .models import SystemAdapter, Task
 from .scoring import score
+from .statistics import grouped_summary, transfer_differences
 
 
 def _git_commit() -> str | None:
@@ -46,7 +48,8 @@ def run_evaluation(
         output = None
         steps = 0
         try:
-            response = adapter.run(task, seed=seed)
+            adapter_task = task if getattr(adapter, "trusted_gold_access", False) else replace(task, expected=None)
+            response = adapter.run(adapter_task, seed=seed)
             output, steps = response.output, response.steps
             elapsed = time.monotonic() - task_started
             if steps > task.limits["max_steps"]:
@@ -57,12 +60,18 @@ def run_evaluation(
         except Exception as exc:  # preserve task failures as data
             elapsed = time.monotonic() - task_started
             status, error = "failed", f"{type(exc).__name__}: {exc}"
-            task_score = {"scorer": task.scorer, "score": 0.0, "matched": False}
+            task_score = {
+                "scorer": task.scorer,
+                "score": 0.0,
+                "matched": False,
+                "outcome": "invalid",
+            }
         results.append(
             {
                 "task_id": task.task_id,
                 "task_version": task.version,
                 "family": task.family,
+                "condition": task.condition,
                 "status": status,
                 "output": output,
                 "output_sha256": sha256(output),
@@ -73,8 +82,9 @@ def run_evaluation(
             }
         )
     ended = datetime.now(timezone.utc)
+    groups = grouped_summary(results)
     manifest = {
-        "schema_version": "0.1.0",
+        "schema_version": "0.2.0",
         "harness_version": __version__,
         "repository_commit": _git_commit(),
         "started_at": started.isoformat(),
@@ -99,6 +109,7 @@ def run_evaluation(
                 "version": task.version,
                 "scorer": task.scorer,
                 "limits": task.limits,
+                "budget": task.budget,
                 "input_sha256": sha256(task.input),
             }
             for task in tasks
@@ -106,7 +117,8 @@ def run_evaluation(
         "results_sha256": sha256(results),
         "retries": 0,
         "exclusions": [],
+        "grouped_statistics": groups,
+        "transfer_differences": transfer_differences(groups),
     }
     write_bundle(output_dir, manifest, results)
     return manifest, results
-
