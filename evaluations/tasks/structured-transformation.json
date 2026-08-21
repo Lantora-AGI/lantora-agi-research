@@ -1,0 +1,22 @@
+{
+  "task_id": "structured-transformation-001",
+  "version": "0.1.0",
+  "family": "knowledge-representation",
+  "prompt": "Sort records by ascending priority, then by name.",
+  "operation": "sort_records",
+  "input": {
+    "records": [
+      {"name": "gamma", "priority": 2},
+      {"name": "beta", "priority": 1},
+      {"name": "alpha", "priority": 1}
+    ]
+  },
+  "expected": [
+    {"name": "alpha", "priority": 1},
+    {"name": "beta", "priority": 1},
+    {"name": "gamma", "priority": 2}
+  ],
+  "scorer": "exact_match",
+  "limits": {"max_seconds": 1, "max_steps": 1}
+}
+

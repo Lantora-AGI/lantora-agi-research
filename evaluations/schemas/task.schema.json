@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lantora-agi.github.io/schemas/task.schema.json",
+  "title": "Lantora evaluation task",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["task_id", "version", "family", "prompt", "operation", "input", "expected", "scorer", "limits"],
+  "properties": {
+    "task_id": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "family": {"type": "string", "minLength": 1},
+    "prompt": {"type": "string", "minLength": 1},
+    "operation": {"type": "string", "minLength": 1},
+    "input": {},
+    "expected": {},
+    "scorer": {"const": "exact_match"},
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_seconds", "max_steps"],
+      "properties": {
+        "max_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "max_steps": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}
+

@@ -1,0 +1,18 @@
+{
+  "task_id": "rule-reasoning-001",
+  "version": "0.1.0",
+  "family": "reasoning",
+  "prompt": "Apply the rules to closure and return all facts alphabetically.",
+  "operation": "apply_rules",
+  "input": {
+    "facts": ["clear", "charged"],
+    "rules": [
+      {"if": ["clear", "charged"], "then": "ready"},
+      {"if": ["ready"], "then": "approved"}
+    ]
+  },
+  "expected": ["approved", "charged", "clear", "ready"],
+  "scorer": "exact_match",
+  "limits": {"max_seconds": 1, "max_steps": 1}
+}
+

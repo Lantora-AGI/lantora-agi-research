@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lantora-agi.github.io/schemas/result.schema.json",
+  "title": "Lantora evaluation result list",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["task_id", "task_version", "family", "status", "output", "output_sha256", "score", "steps", "duration_seconds", "error"],
+    "properties": {
+      "task_id": {"type": "string"},
+      "task_version": {"type": "string"},
+      "family": {"type": "string"},
+      "status": {"enum": ["completed", "failed"]},
+      "output": {},
+      "output_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+      "score": {
+        "type": "object",
+        "required": ["scorer", "score", "matched"],
+        "properties": {
+          "scorer": {"type": "string"},
+          "score": {"type": "number", "minimum": 0, "maximum": 1},
+          "matched": {"type": "boolean"}
+        }
+      },
+      "steps": {"type": "integer", "minimum": 0},
+      "duration_seconds": {"type": "number", "minimum": 0},
+      "error": {"type": ["string", "null"]}
+    }
+  }
+}
+
