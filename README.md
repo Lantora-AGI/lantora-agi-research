@@ -18,8 +18,26 @@ This repository is a research program, not a claim that AGI has been achieved or
 - [Research roadmap](ROADMAP.md)
 - [Research governance](RESEARCH_GOVERNANCE.md)
 - [Safety boundaries](SAFETY.md)
+- [Evaluation harness](evaluations/README.md)
 - [How to contribute](CONTRIBUTING.md)
 - [Security reporting](SECURITY.md)
+
+## Run the evaluation harness
+
+The v0.1 harness is a provider-neutral, local-first foundation for reproducible
+experiments. Its three included tasks validate the infrastructure; they are not
+AGI benchmarks.
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --no-deps -e .
+lantora-eval --output runs/example --seed 17
+python -m unittest discover -s tests -v
+```
+
+The command writes `manifest.json`, `results.json`, and `report.md` into a new
+output directory. It refuses to overwrite an existing run bundle.
 
 ## How work moves through the project
 
@@ -33,7 +51,7 @@ This repository is a research program, not a claim that AGI has been achieved or
 
 ## Current status
 
-The program is in Stage 1: defining measurable objectives, evaluation principles, and research boundaries. There is no validated AGI system in this repository.
+The program has begun Stage 2: implementing reproducible evaluation infrastructure on top of the Stage 1 definitions. There is no validated AGI system in this repository.
 
 ## Licensing
 
@@ -42,4 +60,3 @@ Unless a file states otherwise, software source code is intended to be released 
 ## Responsible disclosure
 
 Do not publicly post vulnerabilities, leaked credentials, or findings that materially enable dangerous capabilities. Follow [SECURITY.md](SECURITY.md).
-

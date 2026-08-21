@@ -1,0 +1,15 @@
+{
+  "task_id": "simple-planning-001",
+  "version": "0.1.0",
+  "family": "planning",
+  "prompt": "Return the alphabetically tie-broken order satisfying all before constraints.",
+  "operation": "topological_order",
+  "input": {
+    "nodes": ["publish", "review", "draft", "test"],
+    "before": [["draft", "review"], ["draft", "test"], ["review", "publish"], ["test", "publish"]]
+  },
+  "expected": ["draft", "review", "test", "publish"],
+  "scorer": "exact_match",
+  "limits": {"max_seconds": 1, "max_steps": 1}
+}
+
