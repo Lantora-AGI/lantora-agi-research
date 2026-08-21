@@ -22,4 +22,13 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Run example evaluation
         run: lantora-eval --output /tmp/lantora-example --seed 17
-
+      - name: Generate and validate pilot suite
+        run: |
+          lantora-pilot generate --seed 13001 --items-per-condition 5 --output /tmp/lantora-pilot
+          lantora-pilot validate --tasks /tmp/lantora-pilot/tasks
+      - name: Run pilot baselines
+        run: |
+          lantora-pilot evaluate --tasks /tmp/lantora-pilot/tasks --adapter heuristic --seed 17 --output /tmp/lantora-heuristic
+          lantora-pilot evaluate --tasks /tmp/lantora-pilot/tasks --adapter random --seed 17 --output /tmp/lantora-random
+      - name: Verify multi-seed reporting
+        run: lantora-pilot study --seeds 13001 13002 13003 13004 13005 --items-per-condition 1 --adapter random --output /tmp/lantora-study

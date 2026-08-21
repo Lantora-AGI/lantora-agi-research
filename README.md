@@ -19,6 +19,7 @@ This repository is a research program, not a claim that AGI has been achieved or
 - [Research governance](RESEARCH_GOVERNANCE.md)
 - [Safety boundaries](SAFETY.md)
 - [Evaluation harness](evaluations/README.md)
+- [Stage 2 pilot suite](evaluations/pilot/README.md)
 - [How to contribute](CONTRIBUTING.md)
 - [Security reporting](SECURITY.md)
 

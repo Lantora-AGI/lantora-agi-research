@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Protocol
 
 
@@ -20,6 +20,9 @@ class Task:
     expected: JSONValue
     scorer: str
     limits: dict[str, int | float]
+    condition: str = "infrastructure"
+    budget: dict[str, JSONValue] = field(default_factory=dict)
+    metadata: dict[str, JSONValue] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)

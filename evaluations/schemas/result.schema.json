@@ -5,21 +5,24 @@
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["task_id", "task_version", "family", "status", "output", "output_sha256", "score", "steps", "duration_seconds", "error"],
+    "required": ["task_id", "task_version", "family", "condition", "status", "output", "output_sha256", "score", "steps", "duration_seconds", "error"],
     "properties": {
       "task_id": {"type": "string"},
       "task_version": {"type": "string"},
       "family": {"type": "string"},
+      "condition": {"type": "string"},
       "status": {"enum": ["completed", "failed"]},
       "output": {},
       "output_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
       "score": {
         "type": "object",
-        "required": ["scorer", "score", "matched"],
+        "required": ["scorer", "score", "matched", "outcome"],
         "properties": {
           "scorer": {"type": "string"},
           "score": {"type": "number", "minimum": 0, "maximum": 1},
-          "matched": {"type": "boolean"}
+          "matched": {"type": "boolean"},
+          "outcome": {"enum": ["correct", "incorrect", "abstained", "invalid"]},
+          "violations": {"type": "array", "items": {"type": "string"}}
         }
       },
       "steps": {"type": "integer", "minimum": 0},
@@ -28,4 +31,3 @@
     }
   }
 }
-

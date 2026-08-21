@@ -33,6 +33,17 @@ Each successful bundle contains:
 See [threat model and limitations](threat-model.md) before adding adapters or
 tasks.
 
+## Stage 2 scientific pilot
+
+The [pilot suite](pilot/README.md) adds deterministic generators for abstract
+reasoning, learning and transfer, and planning. It separates control, transfer,
+and harder conditions; validates ambiguity and satisfiability; supplies
+transparent non-model baselines; and reports per-group Wilson intervals without
+creating a composite AGI score.
+
+The pilot contains public development machinery only. It does not include a
+model integration or protected audit data.
+
 ## Adding a task
 
 1. Start from one of the harmless fixtures in `evaluations/tasks/`.
@@ -43,4 +54,3 @@ tasks.
 
 The v0.1 registry accepts only the `exact_match` scorer. New scorers require a
 reviewed interface change; do not encode executable code in task files.
-

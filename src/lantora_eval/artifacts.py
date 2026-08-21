@@ -30,7 +30,7 @@ def write_bundle(directory: Path, manifest: dict[str, Any], results: list[dict[s
         f"- Seed: {manifest['seed']}",
         f"- Tasks passed: {passed}/{len(results)}",
         "",
-        "These fixtures validate the harness; passing them is not evidence of AGI.",
+        "Results describe only the tested task distribution; passing is not evidence of AGI.",
         "",
         "| Task | Family | Score | Status |",
         "|---|---|---:|---|",
@@ -40,5 +40,40 @@ def write_bundle(directory: Path, manifest: dict[str, Any], results: list[dict[s
             f"| {result['task_id']} | {result['family']} | "
             f"{result['score']['score']:.1f} | {result['status']} |"
         )
+    grouped = manifest.get("grouped_statistics", [])
+    if grouped:
+        lines.extend(
+            [
+                "",
+                "## Family and condition results",
+                "",
+                "No composite AGI score is calculated.",
+                "",
+                "| Family | Condition | Success | Rate | 95% Wilson interval |",
+                "|---|---|---:|---:|---:|",
+            ]
+        )
+        for group in grouped:
+            low, high = group["wilson_95"]
+            lines.append(
+                f"| {group['family']} | {group['condition']} | "
+                f"{group['successes']}/{group['total']} | {group['success_rate']:.3f} | "
+                f"[{low:.3f}, {high:.3f}] |"
+            )
+    differences = manifest.get("transfer_differences", [])
+    if differences:
+        lines.extend(
+            [
+                "",
+                "## Control-to-transfer differences",
+                "",
+                "| Family | Control n | Transfer n | Transfer minus control |",
+                "|---|---:|---:|---:|",
+            ]
+        )
+        for difference in differences:
+            lines.append(
+                f"| {difference['family']} | {difference['control_total']} | "
+                f"{difference['transfer_total']} | {difference['transfer_minus_control']:+.3f} |"
+            )
     (directory / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-

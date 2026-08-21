@@ -13,7 +13,7 @@
     "operation": {"type": "string", "minLength": 1},
     "input": {},
     "expected": {},
-    "scorer": {"const": "exact_match"},
+    "scorer": {"enum": ["exact_match", "constraint_validity"]},
     "limits": {
       "type": "object",
       "additionalProperties": false,
@@ -22,7 +22,9 @@
         "max_seconds": {"type": "number", "exclusiveMinimum": 0},
         "max_steps": {"type": "integer", "minimum": 1}
       }
-    }
+    },
+    "condition": {"type": "string", "minLength": 1},
+    "budget": {"type": "object"},
+    "metadata": {"type": "object"}
   }
 }
-
