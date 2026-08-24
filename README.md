@@ -25,7 +25,7 @@ This repository is a research program, not a claim that AGI has been achieved or
 
 ## Run the evaluation harness
 
-The v0.1 harness is a provider-neutral, local-first foundation for reproducible
+The v0.2 harness is a provider-neutral, local-first foundation for reproducible
 experiments. Its three included tasks validate the infrastructure; they are not
 AGI benchmarks.
 
@@ -40,6 +40,19 @@ python -m unittest discover -s tests -v
 The command writes `manifest.json`, `results.json`, and `report.md` into a new
 output directory. It refuses to overwrite an existing run bundle.
 
+## Help wanted: independent replication
+
+Stage 2 cannot complete until a contributor who did not author the pilot suite
+independently reproduces it in a clean Python 3.12 environment. See
+[Issue #15](https://github.com/Lantora-AGI/lantora-agi-research/issues/15) for
+the exact commands, expected reference results, required artifacts, hash
+comparison rules, and reporting template.
+
+This is a bounded software-and-methods reproduction—not a request to validate
+AGI. Contributors should preserve the original output before troubleshooting,
+report every discrepancy, and avoid modifying the generator, scorer, adapters,
+or tests before the primary run.
+
 ## How work moves through the project
 
 1. Discuss an idea in GitHub Discussions.
@@ -52,7 +65,7 @@ output directory. It refuses to overwrite an existing run bundle.
 
 ## Current status
 
-The program has begun Stage 2: implementing reproducible evaluation infrastructure on top of the Stage 1 definitions. There is no validated AGI system in this repository.
+The program is completing the Stage 2 exit gate. The pilot evaluator is implemented, and [independent reproduction is requested](https://github.com/Lantora-AGI/lantora-agi-research/issues/15) before Stage 3 baseline results can be treated as milestone evidence. There is no validated AGI system in this repository.
 
 ## Licensing
 
