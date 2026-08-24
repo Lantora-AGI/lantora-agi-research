@@ -8,6 +8,10 @@ task distribution and must not be described as an AGI determination.
 The design implements [Issue #13](https://github.com/Lantora-AGI/lantora-agi-research/issues/13)
 and records the decisions from [Discussion #12](https://github.com/orgs/Lantora-AGI/discussions/12).
 
+Independent contributors should follow the
+[replication runbook](REPLICATION.md) and report their evidence in
+[Issue #15](https://github.com/Lantora-AGI/lantora-agi-research/issues/15).
+
 ## Generate and validate the public development suite
 
 ```bash

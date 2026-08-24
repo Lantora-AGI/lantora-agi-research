@@ -20,6 +20,7 @@ This repository is a research program, not a claim that AGI has been achieved or
 - [Safety boundaries](SAFETY.md)
 - [Evaluation harness](evaluations/README.md)
 - [Stage 2 pilot suite](evaluations/pilot/README.md)
+- [Independent replication runbook](evaluations/pilot/REPLICATION.md)
 - [How to contribute](CONTRIBUTING.md)
 - [Security reporting](SECURITY.md)
 
@@ -46,7 +47,9 @@ Stage 2 cannot complete until a contributor who did not author the pilot suite
 independently reproduces it in a clean Python 3.12 environment. See
 [Issue #15](https://github.com/Lantora-AGI/lantora-agi-research/issues/15) for
 the exact commands, expected reference results, required artifacts, hash
-comparison rules, and reporting template.
+comparison rules, and reporting template. The
+[replication runbook](evaluations/pilot/REPLICATION.md) turns those requirements
+into a clean-room checklist.
 
 This is a bounded software-and-methods reproduction—not a request to validate
 AGI. Contributors should preserve the original output before troubleshooting,
