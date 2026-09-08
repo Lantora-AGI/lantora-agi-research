@@ -36,3 +36,7 @@ grouped statistics. Timestamps and measured durations may differ.
 The reproducer should use a clean environment, follow the documented commands,
 publish the generation and run manifests, and disclose platform differences.
 
+For the Stage 2 pilot, compare retained canonical fields against the
+[retroactively published maintainer reference](reference/README.md) with
+`scripts/pilot_reference.py`. The reference's retroactive status limits the
+strength of the evidence and must not be omitted when reporting the result.
