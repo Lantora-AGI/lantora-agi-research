@@ -138,3 +138,10 @@ knowledge composition is deferred to reduce overlap with abstract reasoning.
 
 No provider adapter or protected audit content is included. Untrusted model or
 agent execution still requires an independently reviewed isolation boundary.
+
+## Replication reference
+
+The [machine-comparable maintainer reference](reference/README.md) was
+published retroactively after an independent attempt identified that strict
+artifact equivalence could not be checked from the original aggregate results.
+Its provenance and evidentiary limitation are part of the permanent record.
